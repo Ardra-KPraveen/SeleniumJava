@@ -19,9 +19,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class InsuranceProject_DataDrivenTesting {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-
+	
+// Initialize WebDriver
 WebDriver driver=new ChromeDriver();
+
+// To Open the website
 driver.get("https://demo.guru99.com/test/newtours/");
 driver.findElement(By.linkText("Insurance Project")).click();
 driver.findElement(By.xpath("/html/body/div[3]/a")).click();
@@ -32,12 +34,13 @@ honorifics.click();
 Select dropdown=new Select(honorifics);
 dropdown.selectByVisibleText("Mrs");
 
+//To Load Excel file
 String excelFilePath=".\\datafiles\\inputs.xlsx";
 FileInputStream fip=new FileInputStream(excelFilePath);
-
 XSSFWorkbook wb=new XSSFWorkbook(fip);
 XSSFSheet sheet=wb.getSheet("Sheet1");
 
+//personal details
 String firstName=sheet.getRow(0).getCell(1).getStringCellValue();
 driver.findElement(By.id("user_firstname")).sendKeys(firstName);
 String surname=sheet.getRow(1).getCell(1).getStringCellValue();
@@ -66,6 +69,7 @@ dropdown4.selectByVisibleText("15");
 
 driver.findElement(By.id("licencetype_f")).click();
 
+//License & Occupation
 WebElement LicensePeriod=driver.findElement(By.xpath("//*[@id=\"user_licenceperiod\"]"));
 LicensePeriod.click();
 Select dropdown5=new Select(LicensePeriod);
@@ -76,19 +80,19 @@ Occupation.click();
 Select dropdown6=new Select(Occupation);
 dropdown6.selectByVisibleText("Engineer");
 
+//Address
 String Address=sheet.getRow(3).getCell(1).getStringCellValue();
 driver.findElement(By.xpath("//*[@id=\"user_address_attributes_street\"]")).sendKeys(Address);
 String city=sheet.getRow(4).getCell(1).getStringCellValue();
 driver.findElement(By.xpath("//*[@id=\"user_address_attributes_city\"]")).sendKeys(city);
 String country=sheet.getRow(5).getCell(1).getStringCellValue();
 driver.findElement(By.xpath("//*[@id=\"user_address_attributes_county\"]")).sendKeys(country);
-//String postalCode=sheet.getRow(6).getCell(1).getStringCellValue();
 
 DataFormatter format = new DataFormatter();
 String postalCode = format.formatCellValue(sheet.getRow(6).getCell(1));
 driver.findElement(By.xpath("//*[@id=\"user_address_attributes_postcode\"]")).sendKeys(postalCode);
 
-//driver.findElement(By.xpath("//*[@id=\"user_address_attributes_postcode\"]")).sendKeys(postalCode);
+//Credentials and Form Submission
 String email=sheet.getRow(7).getCell(1).getStringCellValue();
 driver.findElement(By.xpath("//*[@id=\"user_user_detail_attributes_email\"]")).sendKeys(email);
 String password=sheet.getRow(8).getCell(1).getStringCellValue();
@@ -96,6 +100,9 @@ driver.findElement(By.xpath("//*[@id=\"user_user_detail_attributes_password\"]")
 driver.findElement(By.xpath("//*[@id=\"user_user_detail_attributes_password_confirmation\"]")).sendKeys(password);
 driver.findElement(By.xpath("//*[@id=\"new_user\"]/div[5]/input[2]")).click();
 
+wb.close();
+driver.quit();
 
+System.out.println("Form submitted successfully!");
 
 }}
