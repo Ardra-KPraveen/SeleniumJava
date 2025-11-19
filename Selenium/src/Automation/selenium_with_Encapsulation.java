@@ -12,9 +12,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.opentelemetry.sdk.metrics.data.Data;
 
+//Using OOPS concept-Encapsulation in selenium
 public class selenium_with_Encapsulation {
 
 	public static void main(String[] args) {
@@ -65,3 +65,4 @@ public class selenium_with_Encapsulation {
 	
 
 }
+
